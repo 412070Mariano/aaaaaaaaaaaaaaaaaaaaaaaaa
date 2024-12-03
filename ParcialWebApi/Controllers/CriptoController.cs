@@ -62,8 +62,14 @@ namespace ParcialWebApi.Controllers
         {
             try
             {
-                _repository.inhabilitacion(id);
-                return Ok("Inhabilitación realizada correctamente!");
+                if (_repository.inhabilitacion(id))
+                {
+                    return Ok("¡Criptomoneda Inhabilitada con éxito!");
+                }
+                else
+                {
+                    return NotFound("Esta Criptomoneda ya se encuentra inhabilitada");
+                }
             }
             catch (Exception)
             {
