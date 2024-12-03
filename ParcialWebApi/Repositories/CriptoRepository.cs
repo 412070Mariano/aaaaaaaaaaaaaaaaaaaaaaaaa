@@ -18,16 +18,21 @@ namespace ParcialWebApi.Repositories
 
         public bool inhabilitacion(int id)
         {
-            var desabilitar = _context.Criptomonedas.Find(id);
-            var criptodesabilitar = _context.Criptomonedas.Where(x => x.Estado=="H").ToList();
-            if (criptodesabilitar != null && desabilitar != null)
+            var deshabilitar = _context.Criptomonedas.Find(id);
+        
+            if (deshabilitar != null && deshabilitar.Estado == "H")
             {
-                desabilitar.Estado = "NH";
-                _context.Criptomonedas.Update(desabilitar);
+        
+                deshabilitar.Estado = "NH";
+        
+        
+                _context.Criptomonedas.Update(deshabilitar);
+        
+        
+                return _context.SaveChanges() > 0;
             }
-            return _context.SaveChanges()>0;
+            return false;
         }
-
         public bool Update(int id, double valor, string simbolo, DateTime fecha)
         {
             var criptoActual = _context.Criptomonedas.Find(id);
