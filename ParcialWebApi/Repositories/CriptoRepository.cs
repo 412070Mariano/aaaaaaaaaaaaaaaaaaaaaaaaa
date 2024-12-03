@@ -19,7 +19,8 @@ namespace ParcialWebApi.Repositories
         public bool inhabilitacion(int id)
         {
             var desabilitar = _context.Criptomonedas.Find(id);
-            if (desabilitar != null)
+            var criptodesabilitar = _context.Criptomonedas.Where(x => x.Estado=="H").ToList();
+            if (criptodesabilitar != null && desabilitar != null)
             {
                 desabilitar.Estado = "NH";
                 _context.Criptomonedas.Update(desabilitar);
